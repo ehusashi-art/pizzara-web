@@ -1,0 +1,32 @@
+const products=[
+ {name:"BBQ Chicken Pizza",category:"Chicken Pizza",price:1500,image:"pizza-1.png",desc:"Cheese with Shrimp"},
+ {name:"Tandoori Chicken Pizza",category:"Chicken Pizza",price:1500,image:"tandoori-chicken.png",desc:"Smoky tandoori chicken"},
+ {name:"Chicken Kebab Pizza",category:"Chicken Pizza",price:1500,image:"chicken-kebab.png",desc:"Tender kebab and cheese"},
+ {name:"Pepperoni Pizza",category:"Pepperoni",price:1500,image:"pizza-2.png",desc:"Classic pepperoni and cheese"},
+ {name:"Pepperoni Pizza",category:"Pepperoni",price:1500,image:"pepperonipizza.png",desc:"Classic pepperoni and cheese"},
+ {name:"Margherita Pizza",category:"Margherita",price:1500,image:"pizza-3.png",desc:"Tomato, basil and mozzarella"},
+ {name:"Margherita Pizza",category:"Margherita",price:1500,image:"magheritta2.png",desc:"Tomato, basil and mozzarella"},
+ {name:"Hawaiian Pizza",category:"Hawaiian",price:1500,image:"pizza-4.png",desc:"Sweet pineapple and ham"},
+ {name:"Hawaiian Pizza",category:"Hawaiian",price:1500,image:"hawaianpizza.jpg",desc:"Sweet pineapple and ham"},
+ {name:"Meat Lover’s Pizza",category:"Meat Lover’s Pizza",price:1500,image:"barbecue-chicken-pizza.png",desc:"Loaded with delicious toppings"},
+ {name:"BBQ Meat Pizza",category:"Meat Lover’s Pizza",price:1500,image:"meatloversbbq.png",desc:"Loaded delicious tender meat"},
+ {name:"Meat Lover’s Pizza",category:"Meat Lover’s Pizza",price:1500,image:"meatlovers1.jpg",desc:"Loaded with delicious toppings"},
+ {name:"Fresh Pizza",category:"Margherita",price:1500,image:"freshpizza.png",desc:"Freshly made, every time"}
+];
+let cart=JSON.parse(sessionStorage.getItem("pizzaara-cart")||"[]");
+const asset=name=>"images/"+name;
+function renderProducts(container,filter,limit){if(!container)return;let list=products.filter(p=>filter==="All"||p.category===filter);if(limit)list=list.slice(0,limit);container.innerHTML=list.map((p,i)=>`<article class="product-card"><img class="product-image" src="${asset(p.image)}" alt="${p.name}"><div class="product-info"><h3>${p.name}</h3>${container.classList.contains("featured-products")?`<p>(${p.desc})</p>`:""}<strong>Ksh. ${p.price.toLocaleString("en-KE")}</strong><button class="add-cart" data-product="${products.indexOf(p)}">Add to Cart</button></div></article>`).join("");}
+const featured=document.querySelector(".featured-products"),shop=document.querySelector(".shop-products");
+if(featured)renderProducts(featured,"Chicken Pizza",3);
+if(shop)renderProducts(shop,"All");
+document.querySelectorAll(".tabs button").forEach(btn=>btn.addEventListener("click",()=>{const parent=btn.closest(".tabs");parent.querySelectorAll("button").forEach(b=>b.classList.toggle("selected",b===btn));if(parent.classList.contains("menu-tabs"))renderProducts(featured,btn.dataset.filter,3);else renderProducts(shop,btn.dataset.filter);}));
+document.getElementById("hero-search")?.addEventListener("submit",e=>{e.preventDefault();const q=document.getElementById("pizza-search").value.toLowerCase().trim();if(!q){location.href="shop.html";return;}if(shop){renderProducts(shop,"All");document.querySelectorAll(".shop-tabs button").forEach(b=>b.classList.toggle("selected",b.dataset.filter==="All"));shop.querySelectorAll(".product-card").forEach(card=>card.hidden=!card.textContent.toLowerCase().includes(q));}else{sessionStorage.setItem("pizzaara-search",q);location.href="shop.html";}});
+const pendingSearch=sessionStorage.getItem("pizzaara-search");if(shop&&pendingSearch){shop.querySelectorAll(".product-card").forEach(card=>card.hidden=!card.textContent.toLowerCase().includes(pendingSearch));sessionStorage.removeItem("pizzaara-search");}
+function saveCart(){sessionStorage.setItem("pizzaara-cart",JSON.stringify(cart));renderCart();}
+function renderCart(){document.querySelectorAll(".cart-count").forEach(el=>el.textContent=cart.reduce((s,x)=>s+x.qty,0));document.querySelectorAll(".cart-items").forEach(el=>el.innerHTML=cart.length?cart.map(item=>`<div class="cart-row"><img src="${asset(item.image)}" alt=""><div><h4>${item.name}</h4><small>Ksh. ${item.price.toLocaleString("en-KE")}</small><div class="qty-controls"><button data-action="minus" data-id="${item.id}">−</button><span>${item.qty}</span><button data-action="plus" data-id="${item.id}">+</button></div></div><button data-action="remove" data-id="${item.id}" aria-label="Remove ${item.name}">×</button></div>`).join(""):"<p>Your cart is empty. Add a pizza to get started!</p>");document.querySelectorAll(".cart-total b").forEach(el=>el.textContent="Ksh. "+cart.reduce((s,x)=>s+x.price*x.qty,0).toLocaleString("en-KE"));}
+document.addEventListener("click",e=>{const add=e.target.closest(".add-cart");if(add){const p=products[Number(add.dataset.product)],found=cart.find(x=>x.id===Number(add.dataset.product));if(found)found.qty++;else cart.push({...p,id:Number(add.dataset.product),qty:1});saveCart();const old=add.textContent;add.textContent="Added ✓";setTimeout(()=>add.textContent=old,900);}const control=e.target.closest("[data-action]");if(control){const item=cart.find(x=>x.id===Number(control.dataset.id));if(item){if(control.dataset.action==="plus")item.qty++;if(control.dataset.action==="minus")item.qty--;if(control.dataset.action==="remove"||item.qty<=0)cart=cart.filter(x=>x.id!==item.id);saveCart();}}});
+const panel=document.querySelector(".cart-panel"),backdrop=document.querySelector(".cart-backdrop");function openCart(){panel?.classList.add("open");backdrop?.classList.add("show");panel?.setAttribute("aria-hidden","false")}function closeCart(){panel?.classList.remove("open");backdrop?.classList.remove("show");panel?.setAttribute("aria-hidden","true")}
+document.querySelectorAll(".cart-trigger").forEach(b=>b.addEventListener("click",openCart));document.querySelector(".cart-close")?.addEventListener("click",closeCart);backdrop?.addEventListener("click",closeCart);document.querySelector(".checkout")?.addEventListener("click",()=>alert(cart.length?"Thanks! Checkout is a demo in this frontend.":"Your cart is empty."));
+document.querySelector(".menu-toggle")?.addEventListener("click",()=>document.querySelector(".main-nav")?.classList.toggle("open"));
+document.getElementById("newsletter-form")?.addEventListener("submit",e=>{e.preventDefault();e.currentTarget.querySelector("input").value="";document.querySelector(".newsletter-message").textContent="Thanks for subscribing!";});
+renderCart();

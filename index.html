@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PizzaAra - Fresh Pizza, Delivered</title>
+  <link rel="icon" href="images/favicon.ico"><link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html"><img src="images/logo.svg" alt="PizzaAra"></a>
+  <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+  <nav class="main-nav"><a class="active" href="index.html">Home</a><a href="#why-us">About Us</a><a href="shop.html">Shop</a><a href="#support">Contact</a></nav>
+  <div class="header-actions"><button class="cart-trigger" aria-label="Open cart"><img src="images/shopping-cart.png" alt=""><span class="cart-count">0</span></button><button class="account-trigger" aria-label="User account" title="User account"><img src="images/avatar.png" alt="user-account"></button></div>
+</header>
+<main>
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">Easy way to order your food</p>
+      <h1>Choosing <em>Healthy</em><br>&amp; <em>Fresh</em> Pizza</h1>
+      <p class="intro">We offer the fastest and favorite pizza delivery services all over the country.<br>Search for your favorite pizza toppings here.</p>
+      <form class="search-form" id="hero-search"><label class="search-icon" for="pizza-search">⌕</label><input id="pizza-search" placeholder="Find Pizza Type"><button type="submit">Search</button></form>
+      <div class="stats">
+        <div><span class="stat-icon"><img src="images/cutlery.png" alt="cutlery"></span><b>500+</b><small>Restaurants</small></div><div><span class="stat-icon"><img src="images/varieties.png" alt=""></span><b>200+</b><small>Pizza Varieties</small></div><div><span class="stat-icon"><img src="images/star.png" alt=""></span><b>(7.8)</b><small>10K Reviews</small></div>
+      </div>
+    </div>
+    <div class="hero-art"><img class="hero-pizza" src="images/hero-pizza.png" alt="Freshly topped pizza"><div class="pizza-thumbs"><img src="images/pizza-1.png" alt="Pizza option"><img src="images/pizza-2.png" alt="Pizza option"><img src="images/pizza-3.png" alt="Pizza option"><img src="images/pizza-4.png" alt="Pizza option"></div></div>
+  </section>
+  <section class="menu-section wrap" id="menu">
+    <div class="section-heading"><p class="eyebrow">New in Menu</p><h2><em>Special Menu</em> For You</h2></div>
+    <div class="tabs menu-tabs" role="tablist"><button class="selected" data-filter="Chicken Pizza">Chicken Pizza</button><button data-filter="Pepperoni">Pepperoni</button><button data-filter="Margherita">Margherita</button><button data-filter="Hawaiian">Hawaiian</button><button data-filter="Meat Lover’s Pizza">Meat Lover’s Pizza</button></div>
+    <div class="product-grid featured-products"></div><div class="center"><a class="orange-button" href="shop.html">View More</a></div>
+  </section>
+  <section class="why-section wrap" id="why-us">
+    <img class="why-photo" src="images/why-us.png" alt="Chef preparing fresh pizza">
+    <div class="why-copy"><p class="eyebrow">Why Us</p><h2>Why We Are <em>The Best</em></h2><p>We always try to maintain our food quality for our customers.<br>Our customers’ satisfaction is our top priority.</p>
+      <div class="benefits"><article><img src="images/fresh-pizza.png" alt=""><div><h3>Fresh Pizza</h3><p>We make our pizza to suit your needs as we use the best quality ingredients.</p></div></article><article><img src="images/fast-delivery.png" alt=""><div><h3>Fast Delivery</h3><p>Through rapid delivery, we provide a high level of customer service.</p></div></article><article><img src="images/quality.png" alt=""><div><h3>Best Quality</h3><p>Our delivery service that is available at any time and usually everyday.</p></div></article></div>
+    </div>
+  </section>
+  <section class="support-section wrap" id="support"><div class="section-heading"><p class="eyebrow">Need Any Help?</p><h2><em>Our support Team</em> Is Ready To Assist you</h2></div><div class="support-grid">
+    <a href="mailto:pizzaaradeliveries@info.com" class="support-card"><div class="support-icon"><img src="images/mail.png" alt=""></div><h3>Email Address</h3><p>pizzaaradeliveries@info.com</p></a>
+    <a href="mailto:support@pizzaara.example" class="support-card"><div class="support-icon"><img src="images/live-support.png" alt=""></div><h3>Live Support →</h3><p>Get live support now</p></a>
+    <a href="tel:+254711555888" class="support-card"><div class="support-icon"><img src="images/phone.png" alt=""></div><h3>Phone Number</h3><p>+2547 11 555 888</p></a>
+  </div></section>
+</main>
+<footer class="site-footer"><div class="footer-inner wrap"><div class="footer-brand"><a href="index.html"><img src="images/logo_light.svg" alt="PizzaAra"></a><h3>Stay Connected</h3><div class="socials"><a href="#" aria-label="Facebook"><img src="images/facebook.png" alt=""></a><a href="#" aria-label="Instagram"><img src="images/instagram.png" alt=""></a><a href="#" aria-label="Twitter"><img src="images/twitter.png" alt=""></a><a href="#" aria-label="LinkedIn"><img src="images/linkedin.png" alt=""></a></div></div><div class="quick-links"><h3>Quick Links</h3><a href="index.html">Home</a><a href="#why-us">About Us</a><a href="shop.html">Shop</a><a href="#support">Contact Us</a></div><div class="newsletter"><h3>Subscribe To Our Newsletter to<br>stay updated.</h3><form id="newsletter-form"><input type="email" placeholder="Email Address" required><button>Subscribe</button></form><p class="newsletter-message" aria-live="polite"></p></div></div></footer>
+<aside class="cart-panel" aria-label="Shopping cart" aria-hidden="true"><div class="cart-head"><h2>Your Cart</h2><button class="cart-close" aria-label="Close cart">X</button></div><div class="cart-items"></div><div class="cart-total">Total: <b>Ksh. 0</b></div><button class="checkout">Checkout</button></aside><div class="cart-backdrop"></div>
+<script src="script.js"></script></body></html>
