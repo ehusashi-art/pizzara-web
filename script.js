@@ -7,6 +7,7 @@ const products=[
  {name:"Margherita Pizza",category:"Margherita",price:1500,image:"pizza-3.png",desc:"Tomato, basil and mozzarella"},
  {name:"Margherita Pizza",category:"Margherita",price:1500,image:"magheritta2.png",desc:"Tomato, basil and mozzarella"},
  {name:"Hawaiian Pizza",category:"Hawaiian",price:1500,image:"pizza-4.png",desc:"Sweet pineapple and ham"},
+ {name:"Hawaiian Pizza",category:"Hawaiian",price:1500,image:"hawaian.png",desc:"Sweet pineapple and ham"},
  {name:"Hawaiian Pizza",category:"Hawaiian",price:1500,image:"hawaianpizza.jpg",desc:"Sweet pineapple and ham"},
  {name:"Meat Lover’s Pizza",category:"Meat Lover’s Pizza",price:1500,image:"barbecue-chicken-pizza.png",desc:"Loaded with delicious toppings"},
  {name:"BBQ Meat Pizza",category:"Meat Lover’s Pizza",price:1500,image:"meatloversbbq.png",desc:"Loaded delicious tender meat"},
